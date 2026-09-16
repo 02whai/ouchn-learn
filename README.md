@@ -136,8 +136,12 @@ src/
 
 ## 本地开发
 
+仓库通过 `package.json` 的 `packageManager` 固定使用 `pnpm 9.15.9`。推荐使用 Corepack，让当前仓库自动使用指定版本；这不会要求卸载系统中更新版本的 pnpm，也不会影响其他项目。
+
 ```bash
-pnpm install
+corepack enable
+pnpm --version
+pnpm install --frozen-lockfile
 pnpm run dev
 pnpm run build
 pnpm run typecheck
@@ -145,6 +149,8 @@ pnpm run lint
 pnpm run lint:fix
 pnpm run format
 ```
+
+在仓库目录内执行 `pnpm --version` 应显示 `9.15.9`。如果此前使用其他 pnpm 版本安装过依赖，可先删除 `node_modules` 后重新执行 `pnpm install --frozen-lockfile`。
 
 `pnpm run build` 会输出带 UserScript header 的 `dist/index.global.js`。`dist/` 已被 `.gitignore` 忽略。
 
